@@ -4,22 +4,35 @@ import java.io.*;
 
 public class BBoard {		// This is your main file that connects all classes.
 	// Think about what your global variables need to be.
-
+	ArrayList<User> users = new ArrayList<User>();
+	ArrayList<Message> messages = new ArrayList<Message>();
+	String title;
 	// Default constructor that creates a board with a defaulttitle, empty user and message lists,
 	// and no current user
 	public BBoard() {
-		
+		title = "";
 	}
 
 	// Same as the default constructor except it sets the title of the board
 	public BBoard(String ttl) {	
+		title = new String(ttl);
 	}
 
 	// Gets a filename of a file that stores the user info in a given format (users.txt)
 	// Opens and reads the file of all authorized users and passwords
 	// Constructs a User object from each name/password pair, and populates the userList ArrayList.
 	public void loadUsers(String inputFile) throws FileNotFoundException {
-
+		Scanner sc = new Scanner(inputFile);
+		while(sc.hasNexLine()){
+			String x = sc.nextLine();
+			String[] split = x.split(" ");
+			for(int i = 0; i < split.length; i++){
+				split[i].trim();
+				User temp = new User(split[0], split[1]);
+				System.out.println(temp.getUsername());
+				users.add(temp);
+			}
+		}
 	}
 
 	// Asks for and validates a user/password. 

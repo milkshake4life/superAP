@@ -4,6 +4,11 @@ import java.io.*;
 
 public class Message {
 
+	String person;
+	String topic;
+	String words;
+	int code;
+	
 	// Default Constructor
 	public Message() {
 		
@@ -11,6 +16,10 @@ public class Message {
 	
 	// Parameterized Constructor
 	public Message(String auth, String subj, String bod, int i) {
+		person = new String(auth);
+		topic = new String(subj);
+		words = new String(bod);
+		code = i;
 		
 	}
 
@@ -24,7 +33,7 @@ public class Message {
 	// Note: Each indentation increment represents 2 spaces. e.g. if indentation ==  1, the reply should be indented 2 spaces, 
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
-
+		
 	}
 
 	// Default function for inheritance
@@ -34,12 +43,12 @@ public class Message {
 
 	// Returns the subject String
 	public String getSubject(){
-		
+		return topic;
 	} 
 
 	// Returns the ID
 	public int getId(){
-		
+		return code;
 	}
 
 	// Adds a child pointer to the parent's childList.
