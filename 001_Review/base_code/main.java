@@ -4,7 +4,6 @@ import java.io.*;
 
 class main {        // This should be all that is in your main.java file.
 	public static void main(String args[]) throws FileNotFoundException {
-	    System.out.println("testing");
         BBoard myBoard = new BBoard("Ethan's Amazing BBoard");          // Feel free to change the name.
         myBoard.loadUsers(args[0]);
         
