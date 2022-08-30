@@ -7,6 +7,7 @@ public class BBoard {		// This is your main file that connects all classes.
 	ArrayList<User> users = new ArrayList<User>();
 	ArrayList<Message> messages = new ArrayList<Message>();
 	User currentUser;
+	messId = 1;
 	String title;
 	// Default constructor that creates a board with a defaulttitle, empty user and message lists,
 	// and no current user
@@ -84,14 +85,18 @@ public class BBoard {		// This is your main file that connects all classes.
 			System.out.print("Choose an action: ");
 			String newTask = sc.nextLine();
 			System.out.println();
-			
+			System.out.println();
+
 			
 			if(newTask.toLowerCase().equals("q")){
 				currentUser = new User();
 				System.out.println("Bye!");
 				return;
 			}
-			if(newTask.toLowerCase().equals("p")){
+			else if(newTask.toLowerCase().equals("n")){
+				addTopic();
+			}
+			else if(newTask.toLowerCase().equals("p")){
 				
 				setPassword();
 			}
@@ -106,7 +111,13 @@ public class BBoard {		// This is your main file that connects all classes.
 	// It will then be the responsibility of the Topic object to invoke the print function recursively on its own replies
 	// The BBoard display function will ignore all reply objects in its message list
 	private void display(){
-
+		for(int i = 0; i < messages.size(); i++){
+			System.out.println("--------------------------------------------");
+			System.out.println("Message #" + (messages.get(i)).getId() + ": " + '"' + (messages.get(i)).getSubject() + '"');
+			System.out.print("From " + cuurentUser + ":" + '"' + (messagess.get(i)).getBody());
+		}
+		
+		
 	}
 
 
@@ -125,7 +136,16 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Once the Topic has been constructed, add it to the messageList
 	// This should invoke your inheritance of Topic to Message
 	private void addTopic(){
-
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Subject: ");
+		String input = sc.nextLine();
+		System.out.println();
+		System.out.print("Body: ");
+		String input2 = sc.nextLine();
+		System.out.println();
+		Topic incon = new Topic(currentUser, input, input2, messId);
+		messId++;
+		messages.add(incon);
 	}
 
 	// This function asks the user to enter a reply to a given Message (which may be either a Topic or a Reply, so we can handle nested replies).
