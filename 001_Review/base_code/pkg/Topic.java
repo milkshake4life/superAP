@@ -5,7 +5,7 @@ import java.io.*;
 public class Topic extends Message {
 
 	// Default Constructor
-	code = 0;
+	int code = 0;
 	public Topic() {
 
 	}

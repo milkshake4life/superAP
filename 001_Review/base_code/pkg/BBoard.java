@@ -7,7 +7,7 @@ public class BBoard {		// This is your main file that connects all classes.
 	ArrayList<User> users = new ArrayList<User>();
 	ArrayList<Message> messages = new ArrayList<Message>();
 	User currentUser;
-	messId = 1;
+	int messId = 1;
 	String title;
 	// Default constructor that creates a board with a defaulttitle, empty user and message lists,
 	// and no current user
@@ -85,8 +85,6 @@ public class BBoard {		// This is your main file that connects all classes.
 			System.out.print("Choose an action: ");
 			String newTask = sc.nextLine();
 			System.out.println();
-			System.out.println();
-
 			
 			if(newTask.toLowerCase().equals("q")){
 				currentUser = new User();
@@ -99,6 +97,12 @@ public class BBoard {		// This is your main file that connects all classes.
 			else if(newTask.toLowerCase().equals("p")){
 				
 				setPassword();
+			}
+			else if(newTask.toLowerCase().equals("d")){
+				display();
+			}
+			else if(newTask.toLowerCase().equals("r")){
+				addReply();
 			}
 			else{
 				System.out.println("Wrong Input - Please enter another.");
@@ -114,7 +118,9 @@ public class BBoard {		// This is your main file that connects all classes.
 		for(int i = 0; i < messages.size(); i++){
 			System.out.println("--------------------------------------------");
 			System.out.println("Message #" + (messages.get(i)).getId() + ": " + '"' + (messages.get(i)).getSubject() + '"');
-			System.out.print("From " + cuurentUser + ":" + '"' + (messagess.get(i)).getBody());
+			System.out.println("From " + currentUser.getUsername() + ":" + '"' + (messages.get(i)).getBody() + '"');
+			(messages.get(i)).print(1);
+			System.out.println("--------------------------------------------");
 		}
 		
 		
@@ -139,11 +145,10 @@ public class BBoard {		// This is your main file that connects all classes.
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Subject: ");
 		String input = sc.nextLine();
-		System.out.println();
 		System.out.print("Body: ");
 		String input2 = sc.nextLine();
 		System.out.println();
-		Topic incon = new Topic(currentUser, input, input2, messId);
+		Topic incon = new Topic(currentUser.getUsername(), input, input2, messId);
 		messId++;
 		messages.add(incon);
 	}
@@ -178,7 +183,31 @@ public class BBoard {		// This is your main file that connects all classes.
 	// Finally, push back the Message created to the BBoard's messageList. 
 	// Note: When the user chooses to return to the menu, do not call run() again - just return fro mthis addReply function. 
 	private void addReply(){
-
+		Scanner sc = new Scanner(System.in);
+		boolean check = true;
+		while(check){
+			System.out.print("Enter Message ID (-1 for Menu): ");
+			int idMessage = sc.nextInt();
+			System.out.println();
+			if(idMessage == -1){
+				// System.out.print("what");
+				return;
+			}
+			else if(idMessage < 1 || idMessage >= messId){
+				System.out.println("Invalid Message ID!");
+			}
+			else{
+				check = false;
+				// System.out.print("test");
+			}
+		}
+		System.out.print("Body: ");
+		String tray = sc.nextLine();
+		System.out.println();
+		Reply incon2 = new Reply(currentUser.getUsername(), (messages.get(messId - 2)).getSubject(), tray, messId);
+		messages.get(messId - 2).addChild(incon2);
+		messId++;
+		
 	}
 
 	// This function allows the user to change their current password.

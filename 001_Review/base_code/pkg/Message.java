@@ -8,7 +8,7 @@ public class Message {
 	String topic = new String("");
 	String words = new String("");
 	int code;
-	ArrayList<String> everything = new Arraylist<String>();
+	ArrayList<Message> everything = new ArrayList<Message>();
 	
 	// Default Constructor
 	public Message() {
@@ -17,9 +17,9 @@ public class Message {
 	
 	// Parameterized Constructor
 	public Message(String auth, String subj, String bod, int i) {
-		person = String(auth);
-		topic = String(subj);
-		words = String(bod);
+		person = auth;
+		topic = subj;
+		words = bod;
 		code = i;
 		
 	}
@@ -34,12 +34,16 @@ public class Message {
 	// Note: Each indentation increment represents 2 spaces. e.g. if indentation ==  1, the reply should be indented 2 spaces, 
 	// if it's 2, indent by 4 spaces, etc. 
 	public void print(int indentation){
-		if(person)
+		// System.out.print(everything.size());
+		if(!(everything.size() == 0)){
+			indent(indentation);
 		
-		indent(indentation);
-		
-		for(int i = 0; i<)
-		
+			for(int i = 0; i < everything.size(); i++){
+				System.out.println("Message #" + (everything.get(i)).getId() + ": Re: " + '"' + (everything.get(i)).getSubject() + '"');
+				System.out.println("From " + (everything.get(i)).getUsername() + ":" + '"' + (everything.get(i)).getBody() + '"');
+			}
+			// print(indentation + 1);
+		}
 	}
 	
 	public void indent(int indentation){
@@ -51,6 +55,10 @@ public class Message {
 	// Default function for inheritance
 	public boolean isReply(){
 		return false;
+	}
+	
+	public String getUsername(){
+		return person;
 	}
 
 	// Returns the subject String
