@@ -5,6 +5,13 @@ import java.lang.*;
 
 
 class main {
+	
+	public static void randomize(int[] x){
+		for(int z = 0; z < x.length; z++){
+			x[z] = (int)Math.random()*200000;
+		}
+	}
+	
 	static final long createdNano = System.nanoTime();
 
 	public static void main(String args[]) {
@@ -26,6 +33,9 @@ class main {
 
 			//  Put your method between these two comments
 
+
+			
+			randomize(nums);
 			//
 
 			finish = System.nanoTime();
